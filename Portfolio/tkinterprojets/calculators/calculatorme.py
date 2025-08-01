@@ -1,15 +1,15 @@
 import tkinter as tk
 import customtkinter as ctk
-
+from tkinter import font as tkFont
 frame = tk.Tk()
 frame.title("Calculator bad")
-frame.geometry( "500x500")
-
-
+frame.geometry( "440x440")
+frame.config(bg="grey")         
+custom_font = tkFont.Font(family="Digital-7", size=20, weight="bold")   
 currentinput = tk.StringVar(value="")
 
 
-root = ctk.CTkFrame( frame, width= 350, height= 350)
+root = ctk.CTkFrame( frame, width= 310, height= 370)
 
 root.place(x = 50, y = 50)
 display = ctk.CTkEntry(
@@ -17,15 +17,18 @@ display = ctk.CTkEntry(
                      width= 270,
                      height=60,
                      justify = "right",
-                     font=('Arial', 28),
-                     textvariable = currentinput                             
+                     font=(custom_font, 28),
+                     textvariable = currentinput,
+                     border_width= 10,
+                     
+                     
+
 )
 
 
 
 display.place(x = 20, y = 10)
 def buttonpress(text):
-    print(f"you pressed {text}")
     if text == "=":
         try:
 
@@ -47,7 +50,7 @@ def createbutton(parent, text, x, y, width, height):
     button = ctk.CTkButton(
                         parent,
                         text = text,
-                        font=('Arial', 24),
+                        font=(custom_font, 24),
                         width = width,
                         height = height,
                         text_color = "black",
@@ -58,22 +61,22 @@ def createbutton(parent, text, x, y, width, height):
     ).place(x = x, y = y)
 
 
-createbutton(root, "*" , 20, 90, 60, 60)
-createbutton(root, "C" , 260, 190, 60, 60)
-createbutton(root, "-" , 260, 260, 60, 60)
-createbutton(root, "+" , 260, 330, 60, 60)
-createbutton(root, "/" , 120, 190, 60, 60)
-createbutton(root, "=" , 260, 400, 60, 60)
-createbutton(root, "0" , 50, 190, 60, 60)
-createbutton(root, "9" , 190, 260, 60, 60)
-createbutton(root, "8" , 120, 260, 60, 60)
-createbutton(root, "7" , 50, 260, 60, 60)
-createbutton(root, "6" , 190, 330, 60, 60)
-createbutton(root, "5" , 120, 330, 60, 60)
-createbutton(root, "4" , 50, 330, 60, 60)
-createbutton(root, "3" , 190, 400, 60, 60)
-createbutton(root, "2" , 120, 400, 60, 60)
-createbutton(root, "1" , 50, 400, 60, 60)
+createbutton(root, "*" , 160, 90, 60, 60)
+createbutton(root, "C" , 230, 90, 60, 60)
+createbutton(root, "-" , 230, 160, 60, 60)
+createbutton(root, "+" , 230, 230, 60, 60)
+createbutton(root, "/" , 90, 90, 60, 60)
+createbutton(root, "=" , 230, 300, 60, 60)
+createbutton(root, "0" , 20, 90, 60, 60)
+createbutton(root, "9" , 160, 160, 60, 60)
+createbutton(root, "8" , 90, 160, 60, 60)
+createbutton(root, "7" , 20, 160, 60, 60)
+createbutton(root, "6" , 160, 230, 60, 60)
+createbutton(root, "5" , 90, 230, 60, 60)
+createbutton(root, "4" , 20, 230, 60, 60)
+createbutton(root, "3" , 160, 300, 60, 60)
+createbutton(root, "2" , 90, 300, 60, 60)
+createbutton(root, "1" , 20, 300, 60, 60)
 
 
 
