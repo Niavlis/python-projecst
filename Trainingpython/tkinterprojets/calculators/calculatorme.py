@@ -81,3 +81,7 @@ createbutton(root, "1" , 20, 300, 60, 60)
 
 
 root.mainloop()
+
+
+
+# in total took about 5 hours to figure everything out
