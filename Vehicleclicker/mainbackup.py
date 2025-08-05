@@ -12,7 +12,8 @@ import threading as thr
 # set a buch of vars ready
 root = tk.Tk()
 root.title("I am a screen")
-
+# saved vars
+persecond_thread = False
 carnum = 1
 car = int
 root.geometry("500x500")
@@ -20,6 +21,8 @@ money = 0
 num = 1
 carman = 1
 numps = 0
+filepath = "Vehicleclicker/data.json"
+
 ##################################################################################
 #
 # This is for the functions
@@ -53,9 +56,11 @@ def managerbuy(what_industry):
     global numps 
     global money
     global carman
+    global persecond_thread
     if what_industry == "Cars":
-        if numps == 1:
-            thread1 = thr.Thread(target=persecond, daemon=True).start()
+        if persecond_thread is not True:
+            thr.Thread(target=persecond, daemon=True).start()
+            persecond_thread = True
         if money > carman* 15 -1:
             money -= carman* 15
             carman += 1
@@ -83,9 +88,20 @@ def buttonbuy(whatvehicle):
 ###############################
 # other functions
 
+
+datasave ={
+    "persecthr ": persecond_thread,
+    "amount of cars ": carnum,
+    "amount of car managers ": carman,
+    "Num per click ": num,
+    "num per second ": numps,
+    "Money ": money
+}
 # save function
 def saveme():
-    ...
+    with open(filepath, "w") as fw:
+        json.dump(datasave, fw)
+    
 
 # load functions
 def loadme():
@@ -103,6 +119,24 @@ def updatedisplay():
 #############################################################################################
 # This is for creating buttons
 #
+
+#Save and load buttons
+
+
+
+savebut = ctk.CTkButton(
+                master=  root,
+                width = 60,
+                height= 50,
+                text= "Save",
+                command=saveme
+                
+                        )
+
+# for upgrades
+
+upgradesbutt = ctk.CTkButton( root)
+
 #creates the button to buy a car
 
 buttoncarup = ctk.CTkButton(
@@ -116,6 +150,8 @@ buttoncarup = ctk.CTkButton(
                         text_color= "white"                       
 )
 
+##creates the button for buying a manager
+
 buttoncarman = ctk.CTkButton(
                         root,
                         corner_radius=15,
@@ -124,8 +160,7 @@ buttoncarman = ctk.CTkButton(
                         width=90,
                         height= 80,
                         command=lambda: managerbuy("Cars"),
-                        text_color= "white"
-                        
+                        text_color= "white"                       
 )
 
 # Creates the display of money
@@ -152,6 +187,7 @@ mainbutton.place(x = 165, y = 175)
 buttoncarman.place(x = 390, y =190)     
 moneydisplay.place(x = 125, y = 15)   
 buttoncarup.place(x = 390, y = 100)
+savebut.place(x = 10, y = 10)
 #    buttonlayout = [
  #               [ savebut,  moneydisplay, loadbut],
   #              [ upgrademenu, mainbutton, car_sales ],
